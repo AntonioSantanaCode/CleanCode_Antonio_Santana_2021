@@ -1,6 +1,6 @@
 ﻿using MooGameAntonioSantana.Interfaces;
 using MooGameAntonioSantana.Model;
-using MooGameAntonioSantana.Model.Games;
+using MooGameAntonioSantana.Games;
 
 namespace MooGameAntonioSantana.Controller
 {

@@ -2,7 +2,7 @@
 using MooGameAntonioSantana.View;
 using MooGameAntonioSantana.Controller;
 using MooGameAntonioSantana.DAL;
-using MooGameAntonioSantana.Model.Games;
+using MooGameAntonioSantana.Games;
 
 namespace MooGameAntonioSantana
 {

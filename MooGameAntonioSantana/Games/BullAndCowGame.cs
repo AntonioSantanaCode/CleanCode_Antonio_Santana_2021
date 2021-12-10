@@ -1,6 +1,6 @@
 ﻿using MooGameAntonioSantana.Interfaces;
 
-namespace MooGameAntonioSantana.Model.Games
+namespace MooGameAntonioSantana.Games
 {
     public class BullAndCowGame : IGame
     {

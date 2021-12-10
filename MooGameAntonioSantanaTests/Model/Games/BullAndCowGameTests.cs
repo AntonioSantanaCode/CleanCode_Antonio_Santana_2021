@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace MooGameAntonioSantana.Model.Games.Tests
+namespace MooGameAntonioSantana.Games.Tests
 {
     [TestClass()]
     public class BullAndCowGameTests
