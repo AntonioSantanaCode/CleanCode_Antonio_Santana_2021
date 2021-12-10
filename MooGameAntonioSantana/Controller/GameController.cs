@@ -109,7 +109,7 @@ namespace MooGameAntonioSantana.Controller
 
                 PracticeAnswer(goal);
 
-                string guess = _ui.UserInput();
+                string guess = _ui.UserInput().ToUpper();
 
                 int nGuess = 1;
                 string result = _game.CheckGuess(goal, guess);
@@ -118,7 +118,7 @@ namespace MooGameAntonioSantana.Controller
                 while (guess != goal)
                 {
                     nGuess++;
-                    guess = _ui.UserInput();
+                    guess = _ui.UserInput().ToUpper();
                     _ui.UserOutput(guess + "\n");
                     result = _game.CheckGuess(goal, guess);
                     _ui.UserOutput(result + "\n");

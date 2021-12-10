@@ -6,7 +6,7 @@ namespace MooGameAntonioSantana.Model.Games
     {
         public string CheckGuess(string guess, string goal)
         {
-            return guess.ToUpper() == goal ? "Good job!" : "Wrong letter try again!";
+            return guess.ToUpper() == goal ? "Good job!" : "Wrong, try again!";
         }
 
         public string MakeGoal()
