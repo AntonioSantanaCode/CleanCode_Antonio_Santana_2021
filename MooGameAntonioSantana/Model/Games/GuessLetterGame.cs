@@ -2,14 +2,14 @@
 
 namespace MooGameAntonioSantana.Model.Games
 {
-    public class GuessLetterGame : IGuessLetterGame
+    public class GuessLetterGame : IGame
     {
         public string CheckGuess(string guess, string goal)
         {
             return guess.ToUpper() == goal ? "Good job!" : "Wrong letter try again!";
         }
 
-        public string GenerateLetterGoal()
+        public string MakeGoal()
         {
             Random randomLetters = new();
             string letter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

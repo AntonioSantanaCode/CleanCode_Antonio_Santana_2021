@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MooGameAntonioSantana.Interfaces
 {
-    public interface IBullAndCowGame
+    public interface IGame
     {
         public string MakeGoal();
-        public string CheckBC(string goal, string guess);
+        public string CheckGuess(string goal, string guess);
     }
 }

@@ -7,19 +7,17 @@ namespace MooGameAntonioSantana.Controller
     {
         private readonly IUserInterface _ui;
         private readonly IDataHandler _dataHandler;
-        private readonly IBullAndCowGame _bullCowGame;
-        private readonly IGuessLetterGame _guessLetterGame;
+        private readonly IGame _game;
 
         private readonly List<PlayerData> scoreboard = new();
 
         private bool Running { get; set; }
 
-        public GameController(IUserInterface ui, IDataHandler dataHandler, IBullAndCowGame bullCowGame, IGuessLetterGame guessLetterGame)
+        public GameController(IUserInterface ui, IDataHandler dataHandler, IGame game)
         {
             _ui = ui;
             _dataHandler = dataHandler;
-            _bullCowGame = bullCowGame;
-            _guessLetterGame = guessLetterGame;
+            _game = game;
         }
         public void Run()
         {
@@ -94,7 +92,7 @@ namespace MooGameAntonioSantana.Controller
         // Games
         private void BullAndCowGame()
         {
-            string gameName = _bullCowGame.GetType().Name;
+            string gameName = _game.GetType().Name;
             bool running = true;
             _ui.UserOutput("Welcome to Bull and cow game! \nEnter your user name:\n");
             string name = _ui.UserInput();
@@ -102,7 +100,7 @@ namespace MooGameAntonioSantana.Controller
 
             do
             {
-                string goal = _bullCowGame.MakeGoal();
+                string goal = _game.MakeGoal();
 
                 _ui.UserOutput("New game:\n");
 
@@ -111,7 +109,7 @@ namespace MooGameAntonioSantana.Controller
                 string guess = _ui.UserInput();
 
                 int nGuess = 1;
-                string bbcc = _bullCowGame.CheckBC(goal, guess);
+                string bbcc = _game.CheckGuess(goal, guess);
                 _ui.UserOutput(bbcc + "\n");
 
                 while (bbcc != "BBBB,")
@@ -119,7 +117,7 @@ namespace MooGameAntonioSantana.Controller
                     nGuess++;
                     guess = _ui.UserInput();
                     _ui.UserOutput(guess + "\n");
-                    bbcc = _bullCowGame.CheckBC(goal, guess);
+                    bbcc = _game.CheckGuess(goal, guess);
                     _ui.UserOutput(bbcc + "\n");
                 }
 
@@ -135,14 +133,14 @@ namespace MooGameAntonioSantana.Controller
         }
         private void GuessLetterGame()
         {
-            string gameName = _guessLetterGame.GetType().Name;
+            string gameName = _game.GetType().Name;
             bool running = true;
             _ui.UserOutput("Welcome to Guess the Letter! \nEnter your user name:\n");
             string name = _ui.UserInput();
 
             do
             {
-                string goal = _guessLetterGame.GenerateLetterGoal();
+                string goal = _game.MakeGoal();
 
                 _ui.UserOutput("New game:\n");
 
@@ -152,7 +150,7 @@ namespace MooGameAntonioSantana.Controller
 
                 int nGuess = 1;
 
-                _ui.UserOutput($"{_guessLetterGame.CheckGuess(guess, goal)}");
+                _ui.UserOutput($"{_game.CheckGuess(guess, goal)}");
 
                 while (guess != goal)
                 {

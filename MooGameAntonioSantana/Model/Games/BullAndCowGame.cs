@@ -2,7 +2,7 @@
 
 namespace MooGameAntonioSantana.Model.Games
 {
-    public class BullAndCowGame : IBullAndCowGame
+    public class BullAndCowGame : IGame
     {
         public string MakeGoal()
         {
@@ -22,7 +22,7 @@ namespace MooGameAntonioSantana.Model.Games
             return goal;
         }
 
-        public string CheckBC(string goal, string guess)
+        public string CheckGuess(string goal, string guess)
         {
             int cows = 0, bulls = 0;
             guess += "    ";     // if player entered less than 4 chars
