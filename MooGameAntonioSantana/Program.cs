@@ -12,8 +12,9 @@ namespace MooGameAntonioSantana
         {
             IUserInterface ui = new ConsoleIO();
             IDataHandler dataHandler = new DataHandler();
-            IGame game = new BullAndCowGame();
-            GameController controller = new(ui, dataHandler, game);
+            var game = new BullAndCowGame();
+            var game2 = new GuessLetterGame();
+            GameController controller = new(ui, dataHandler, game, game2);
             controller.Run();
         }
     }

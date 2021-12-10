@@ -1,5 +1,6 @@
 ﻿using MooGameAntonioSantana.Interfaces;
 using MooGameAntonioSantana.Model;
+using MooGameAntonioSantana.Model.Games;
 
 namespace MooGameAntonioSantana.Controller
 {
@@ -7,17 +8,20 @@ namespace MooGameAntonioSantana.Controller
     {
         private readonly IUserInterface _ui;
         private readonly IDataHandler _dataHandler;
-        private readonly IGame _game;
+
+        private readonly BullAndCowGame _bullAndCowGame;
+        private readonly GuessLetterGame _guessLetterGame;
 
         private readonly List<PlayerData> scoreboard = new();
 
         private bool Running { get; set; }
 
-        public GameController(IUserInterface ui, IDataHandler dataHandler, IGame game)
+        public GameController(IUserInterface ui, IDataHandler dataHandler, BullAndCowGame bullAndCowGame, GuessLetterGame guessLetterGame)
         {
             _ui = ui;
             _dataHandler = dataHandler;
-            _game = game;
+            _bullAndCowGame = bullAndCowGame;
+            _guessLetterGame = guessLetterGame;
         }
         public void Run()
         {
@@ -47,11 +51,11 @@ namespace MooGameAntonioSantana.Controller
             {
                 case ConsoleKey.D1:
                     _ui.Clear();
-                    BullAndCowGame();
+                    GameBuilder(_bullAndCowGame);
                     break;
                 case ConsoleKey.D2:
                     _ui.Clear();
-                    GuessLetterGame();
+                    GameBuilder(_guessLetterGame);
                     break;
                 case ConsoleKey.Escape:
                     break;
@@ -89,12 +93,11 @@ namespace MooGameAntonioSantana.Controller
             }
         }
 
-        // Games
-        private void BullAndCowGame()
+        private void GameBuilder(IGame _game)
         {
             string gameName = _game.GetType().Name;
             bool running = true;
-            _ui.UserOutput("Welcome to Bull and cow game! \nEnter your user name:\n");
+            _ui.UserOutput("Enter your user name:\n");
             string name = _ui.UserInput();
             _ui.Clear();
 
@@ -109,54 +112,16 @@ namespace MooGameAntonioSantana.Controller
                 string guess = _ui.UserInput();
 
                 int nGuess = 1;
-                string bbcc = _game.CheckGuess(goal, guess);
-                _ui.UserOutput(bbcc + "\n");
-
-                while (bbcc != "BBBB,")
-                {
-                    nGuess++;
-                    guess = _ui.UserInput();
-                    _ui.UserOutput(guess + "\n");
-                    bbcc = _game.CheckGuess(goal, guess);
-                    _ui.UserOutput(bbcc + "\n");
-                }
-
-                _dataHandler.WriteToFile(name, nGuess, gameName);
-                showTopList();
-                _ui.UserOutput($"Correct, it took {nGuess} guesses\nContinue?");
-                string answer = _ui.UserInput();
-                if (answer != null && answer != "" && answer.Substring(0, 1) == "n")
-                {
-                    running = false;
-                }
-            } while (running);
-        }
-        private void GuessLetterGame()
-        {
-            string gameName = _game.GetType().Name;
-            bool running = true;
-            _ui.UserOutput("Welcome to Guess the Letter! \nEnter your user name:\n");
-            string name = _ui.UserInput();
-
-            do
-            {
-                string goal = _game.MakeGoal();
-
-                _ui.UserOutput("New game:\n");
-
-                PracticeAnswer(goal);
-
-                string guess = _ui.UserInput().ToUpper();
-
-                int nGuess = 1;
-
-                _ui.UserOutput($"{_game.CheckGuess(guess, goal)}");
+                string result = _game.CheckGuess(goal, guess);
+                _ui.UserOutput(result + "\n");
 
                 while (guess != goal)
                 {
                     nGuess++;
-                    guess = _ui.UserInput().ToUpper();
+                    guess = _ui.UserInput();
                     _ui.UserOutput(guess + "\n");
+                    result = _game.CheckGuess(goal, guess);
+                    _ui.UserOutput(result + "\n");
                 }
 
                 _dataHandler.WriteToFile(name, nGuess, gameName);
@@ -169,6 +134,5 @@ namespace MooGameAntonioSantana.Controller
                 }
             } while (running);
         }
-
     }
 }

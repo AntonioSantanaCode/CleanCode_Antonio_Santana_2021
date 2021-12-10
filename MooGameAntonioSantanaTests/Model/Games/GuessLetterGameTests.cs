@@ -38,7 +38,7 @@ namespace MooGameAntonioSantana.Model.Games.Tests
         [TestMethod()]
         public void GenerateLetterGoalTest()
         {
-            int goal = guessLetterGame.GenerateLetterGoal().Length;
+            int goal = guessLetterGame.MakeGoal().Length;
             Assert.AreEqual(1, goal);
         }
     }

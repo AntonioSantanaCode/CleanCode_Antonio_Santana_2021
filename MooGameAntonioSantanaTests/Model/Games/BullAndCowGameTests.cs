@@ -25,7 +25,7 @@ namespace MooGameAntonioSantana.Model.Games.Tests
         {
             string userGuess = "1234";
             string goal = "1234";
-            string result = bullAndCowGame.CheckBC(userGuess, goal);
+            string result = bullAndCowGame.CheckGuess(userGuess, goal);
             string bull = "BBBB";
             Assert.AreEqual(bull, result[..4]);
         }
@@ -35,7 +35,7 @@ namespace MooGameAntonioSantana.Model.Games.Tests
         {
             string userGuess = "1234";
             string goal = "5678";
-            string result = bullAndCowGame.CheckBC(userGuess, goal);
+            string result = bullAndCowGame.CheckGuess(userGuess, goal);
             string bull = ",";
             Assert.AreEqual(bull, result);
         }
@@ -45,7 +45,7 @@ namespace MooGameAntonioSantana.Model.Games.Tests
         {
             string userGuess = "1234";
             string goal = "4321";
-            string result = bullAndCowGame.CheckBC(userGuess, goal);
+            string result = bullAndCowGame.CheckGuess(userGuess, goal);
             string bull = "CCCC";
             Assert.AreEqual(bull, result.Substring(1, 4));
         }
