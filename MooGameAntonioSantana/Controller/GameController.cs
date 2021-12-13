@@ -66,7 +66,7 @@ namespace MooGameAntonioSantana.Controller
                     break;
             }
         }
-        private void PracticeAnswer(string goal)
+        private void PracticeAnswer(string answer)
         {
             _ui.UserOutput("Press 1 for practice mode or any other key to start.\n");
 
@@ -75,7 +75,7 @@ namespace MooGameAntonioSantana.Controller
             switch (key)
             {
                 case ConsoleKey.D1:
-                    _ui.UserOutput($"For practice, answer is: {goal}\n");
+                    _ui.UserOutput($"For practice, answer is: {answer}\n");
                     break;
                 default:
                     _ui.UserOutput($"Good luck!\n");
@@ -89,15 +89,18 @@ namespace MooGameAntonioSantana.Controller
             _ui.UserOutput("Player   games average");
             foreach (PlayerData p in _dataHandler.ReadFromFile())
             {
-                _ui.UserOutput(string.Format("{0,-9}{1,5:D}{2,9:F2}", p.Name, p.NGames, p.Average()));
+                _ui.UserOutput(string.Format("{0,-9}{1,5:D}{2,9:F2}", p.Name, p.NumberOfGames, p.Average()));
             }
         }
 
         private void GameBuilder(IGame _game)
         {
             string gameName = _game.GetType().Name;
+
             bool running = true;
+
             _ui.UserOutput("Enter your user name:\n");
+
             string name = _ui.UserInput();
             _ui.Clear();
 
@@ -111,22 +114,22 @@ namespace MooGameAntonioSantana.Controller
 
                 string guess = _ui.UserInput().ToUpper();
 
-                int nGuess = 1;
+                int numberOfGuesses = 1;
                 string result = _game.CheckGuess(goal, guess);
                 _ui.UserOutput(result + "\n");
 
                 while (guess != goal)
                 {
-                    nGuess++;
+                    numberOfGuesses++;
                     guess = _ui.UserInput().ToUpper();
                     _ui.UserOutput(guess + "\n");
                     result = _game.CheckGuess(goal, guess);
                     _ui.UserOutput(result + "\n");
                 }
 
-                _dataHandler.WriteToFile(name, nGuess, gameName);
+                _dataHandler.WriteToFile(name, numberOfGuesses, gameName);
                 showTopList();
-                _ui.UserOutput($"Correct, it took {nGuess} guesses\nContinue?");
+                _ui.UserOutput($"Correct, it took {numberOfGuesses} guesses\nContinue?");
                 string answer = _ui.UserInput();
                 if (answer != null && answer != "" && answer.Substring(0, 1) == "n")
                 {

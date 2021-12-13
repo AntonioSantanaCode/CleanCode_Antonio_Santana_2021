@@ -5,26 +5,26 @@ namespace MooGameAntonioSantana.Model
     public class PlayerData
 	{
 		public string Name { get; private set; }
-		public int NGames { get; private set; }
+		public int NumberOfGames { get; private set; }
         public int TotalGuesses { get; set; }
 
 
 		public PlayerData(string name, int guesses)
 		{
 			this.Name = name;
-			NGames = 1;
+			NumberOfGames = 1;
 			TotalGuesses = guesses;
 		}
 
 		public void Update(int guesses)
 		{
 			TotalGuesses += guesses;
-			NGames++;
+			NumberOfGames++;
 		}
 
 		public double Average()
 		{
-			return (double)TotalGuesses / NGames;
+			return (double)TotalGuesses / NumberOfGames;
 		}
 
 
