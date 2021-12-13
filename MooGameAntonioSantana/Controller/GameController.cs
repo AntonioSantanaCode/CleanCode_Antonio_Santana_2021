@@ -129,7 +129,7 @@ namespace MooGameAntonioSantana.Controller
 
                 _dataHandler.WriteToFile(name, numberOfGuesses, gameName);
                 showTopList();
-                _ui.UserOutput($"Correct, it took {numberOfGuesses} guesses\nContinue?");
+                _ui.UserOutput($"Correct, it took {numberOfGuesses} guesses\nContinue? Type [ y | n ] ");
                 string answer = _ui.UserInput();
                 if (answer != null && answer != "" && answer.Substring(0, 1) == "n")
                 {
