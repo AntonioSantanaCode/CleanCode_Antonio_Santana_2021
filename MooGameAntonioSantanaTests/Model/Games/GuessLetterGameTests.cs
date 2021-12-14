@@ -31,7 +31,7 @@ namespace MooGameAntonioSantana.Games.Tests
             string goal = "A";
 
             string result = guessLetterGame.CheckGuess(userGuess, goal);
-            string answer = "Wrong letter try again!";
+            string answer = "Wrong, try again!";
             Assert.AreEqual(answer, result);
         }
 
