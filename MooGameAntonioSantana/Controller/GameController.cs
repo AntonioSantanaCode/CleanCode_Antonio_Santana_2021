@@ -92,7 +92,6 @@ namespace MooGameAntonioSantana.Controller
                 _ui.UserOutput(string.Format("{0,-9}{1,5:D}{2,9:F2}", p.Name, p.NumberOfGames, p.Average()));
             }
         }
-
         private void GameBuilder(IGame _game)
         {
             string gameName = _game.GetType().Name;
